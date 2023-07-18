@@ -4,12 +4,14 @@
 asgiref=3.5.2=py310hecd8cb5_0
 bzip2=1.0.8=h1de35cc_0
 ca-certificates=2023.05.30=hecd8cb5_0
+click=8.0.4=py310hecd8cb5_0
 django=4.1=py310hecd8cb5_0
 libffi=3.4.4=hecd8cb5_0
 ncurses=6.4=hcec6c5f_0
 openssl=3.0.9=hca72f7f_0
 pip=23.1.2=py310hecd8cb5_0
 python=3.10.12=h5ee71fb_0
+python-dotenv=0.21.0=py310hecd8cb5_0
 readline=8.2=hca72f7f_0
 setuptools=67.8.0=py310hecd8cb5_0
 sqlite=3.41.2=h6c40b1e_0
