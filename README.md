@@ -16,7 +16,7 @@ The management of the VDE using _conda_ is described below.
 From the project's root directory, the VDE can be created with the command
 
 ```sh
-conda create --prefix ./.conda --file environment.yml
+conda create --prefix ./venv --file environment.yml
 ```
 
 > It might be necessary to append `conda-forge` to your channels list
@@ -25,7 +25,7 @@ conda create --prefix ./.conda --file environment.yml
 Once the VDE has been created, it can be activated with
 
 ```sh
-conda activate ./.conda
+conda activate ./venv
 ```
 
 ### Updating the VDE
