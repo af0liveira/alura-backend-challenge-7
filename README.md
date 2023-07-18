@@ -6,5 +6,34 @@ which displays photos and an enticing information about travel destinations.
 Moreover, the site will show statements made by other travellers about the
 destination.
 
----
+## Virtual Development Environment (VDE)
 
+A virtual development environment (VDE) is used in the development of this project to ensure compatibility across local repositories.
+The management of the VDE using _conda_ is described below.
+
+### Creating the VDE with conda
+
+From the project's root directory, the VDE can be created with the command
+
+```sh
+conda create --prefix ./.conda --file environment.yml
+```
+
+> It might be necessary to append `conda-forge` to your channels list
+> wit the command `conda config --append channels conda-forge`
+
+Once the VDE has been created, it can be activated with
+
+```sh
+conda activate ./.conda
+```
+
+### Updating the VDE
+
+If you install or update packages in the VDE, you should update the `envornment.yml` file with the command
+
+```sh
+conda list -e > environment.yml
+```
+
+---
