@@ -6,6 +6,25 @@ which displays photos and an enticing information about travel destinations.
 Moreover, the site will show statements made by other travelers about the
 destination.
 
+## Environment variables
+
+Environment variables specific to this project should be declared in the `.env` file.
+The goal is to keep sensitive information away from the development repository.
+
+The following is a example of `.env` with the declaration of `SECRET_KEY` environment variable:
+
+```sh
+# Environment variables
+
+SECRET_KEY = '<django-secret-key>'
+```
+
+To generate a random secret key from the command line, you can use the command
+
+```sh
+python3 -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())' 
+```
+
 ## Virtual Development Environment (VDE)
 
 A virtual development environment (VDE) is used in the development of this project to ensure compatibility across local repositories.
