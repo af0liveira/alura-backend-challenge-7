@@ -10,3 +10,9 @@ class ReviewsViewSet(viewsets.ModelViewSet):
 
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
+
+class SelectedReviewsViewSet(viewsets.ModelViewSet):
+    """Viewset to display three randomly selected Review instances."""
+
+    queryset = Review.objects.order_by('?')[:3]
+    serializer_class = ReviewSerializer
