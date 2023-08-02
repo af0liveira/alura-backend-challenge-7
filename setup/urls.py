@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 
 from rest_framework import routers
 
@@ -23,10 +25,10 @@ from app.views import (ReviewsViewSet, SelectedReviewsViewSet,
 
 router = routers.DefaultRouter()
 router.register('depoimentos', ReviewsViewSet, basename='Reviews')
-router.register('depoimentos-home', SelectedReviewsViewSet, basename='Reviews')
+router.register('depoimentos-home', SelectedReviewsViewSet, basename='SelectedReviews')
 router.register('destinos', DestinationsViewSet, basename='Destinations')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

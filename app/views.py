@@ -7,17 +7,21 @@ from app.models import Review, Destination
 from app.serializers import ReviewSerializer, DestinationSerializer
 from app.filters import DestinationFilter
 
+
 class ReviewsViewSet(viewsets.ModelViewSet):
     """Viewset to display all Review instances."""
 
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
+    http_method_names = ['post', 'get', 'put', 'delete']
+
 
 class SelectedReviewsViewSet(viewsets.ModelViewSet):
     """Viewset to display three randomly selected Review instances."""
 
     queryset = Review.objects.order_by('?')[:3]
     serializer_class = ReviewSerializer
+
 
 class DestinationsViewSet(viewsets.ModelViewSet):
     """Viewset to display all Destination instances."""
