@@ -18,11 +18,13 @@ from django.urls import path, include
 
 from rest_framework import routers
 
-from app.views import ReviewsViewSet, SelectedReviewsViewSet
+from app.views import (ReviewsViewSet, SelectedReviewsViewSet,
+                       DestinationsViewSet)
 
 router = routers.DefaultRouter()
 router.register('depoimentos', ReviewsViewSet, basename='Reviews')
 router.register('depoimentos-home', SelectedReviewsViewSet, basename='Reviews')
+router.register('destinos', DestinationsViewSet, basename='Destinations')
 
 urlpatterns = [
     path('admin/', admin.site.urls),

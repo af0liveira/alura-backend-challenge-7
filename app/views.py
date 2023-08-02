@@ -2,8 +2,8 @@ import random
 
 from rest_framework import viewsets, generics
 
-from app.models import Review
-from app.serializers import ReviewSerializer
+from app.models import Review, Destination
+from app.serializers import ReviewSerializer, DestinationSerializer
 
 class ReviewsViewSet(viewsets.ModelViewSet):
     """Viewset to display all Review instances."""
@@ -16,3 +16,9 @@ class SelectedReviewsViewSet(viewsets.ModelViewSet):
 
     queryset = Review.objects.order_by('?')[:3]
     serializer_class = ReviewSerializer
+
+class DestinationsViewSet(viewsets.ModelViewSet):
+    """Viewset to display all Destination instances."""
+
+    queryset = Destination.objects.all()
+    serializer_class = DestinationSerializer
