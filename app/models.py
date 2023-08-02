@@ -1,4 +1,5 @@
 from django.db import models
+from djmoney.models.fields import MoneyField
 
 class Review(models.Model):
     """Represents a user review."""
@@ -11,6 +12,7 @@ class Review(models.Model):
 class Destination(models.Model):
     """Represents a destination."""
 
-    photo = models.URLField()
+    photo = models.ImageField(blank=True)
     name = models.CharField(max_length=50, null=False, blank=False)
-    price = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=False)
+    price = MoneyField(max_digits=14, decimal_places=2, default_currency='BRL',
+                       null=True, blank=False)

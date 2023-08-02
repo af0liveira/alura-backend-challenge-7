@@ -25,11 +25,12 @@ class SelectedReviewsViewSet(viewsets.ModelViewSet):
 
 
 class DestinationsViewSet(viewsets.ModelViewSet):
-    """Viewset to display all Destination instances."""
+    """Viewset to display the Destination list."""
 
     queryset = Destination.objects.all()
     serializer_class = DestinationSerializer
     filterset_class = DestinationFilter
+    http_method_names = ['post', 'get', 'put', 'delete']
 
     def list(self, request, *args, **kwargs):
         data = super().list(request, *args, **kwargs)
