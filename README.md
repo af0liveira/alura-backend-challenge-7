@@ -1,4 +1,4 @@
-# Jornada Milhas
+# Alura Challenge Backend 7
 
 This project is being developed as part of the **7th Alura Backend Challenge**.
 The goal is to develop the API to integrate to the frontend of a travel website,
@@ -28,31 +28,64 @@ python3 -c 'from django.core.management.utils import get_random_secret_key; prin
 ## Virtual Development Environment (VDE)
 
 A virtual development environment (VDE) is used in the development of this project to ensure compatibility across local repositories.
-The management of the VDE using _conda_ is described below.
+The management of the VDE using _venv_ is described below.
 
-### Creating the VDE with conda
+### Creating the VDE
 
 From the project's root directory, the VDE can be created with the command
 
 ```sh
-conda create --prefix ./venv --file environment.yml
+python3 -m venv ./venv
 ```
 
-> It might be necessary to append `conda-forge` to your channels list
-> wit the command `conda config --append channels conda-forge`
-
-Once the VDE has been created, it can be activated with
+Once the VDE has been created, it must be activated.
+If you are using bash or zsh, you can use the command
 
 ```sh
-conda activate ./venv
+source ./venv/bin/activate
 ```
 
-### Updating the VDE
+For other shells, look for the appropriate activation script in `./venv/bin`
 
-If you install or update packages in the VDE, you should update the `envornment.yml` file with the command
+Once the virtual environment is activated, install the dependencies with
 
 ```sh
-conda list -e > environment.yml
+pip install -r requirements.txt
 ```
+
+If all went well, you should be able to start the Django server with
+
+```sh
+python manage.py runserver
+```
+
+### Installing new dependencies
+
+New dependencies should be installed using `pip`:
+
+```sh
+pip install <package>==<version>
+```
+
+> **Warning**
+>
+> If the package version is not specified, `pip` will try to install the latest version available, which can result in all previously installed packages being updated.
+> In order to force `pip` to find the newest package that matches the specs in `requirements.txt`, you should use the command
+
+```sh
+pip install -c requirements.txt <package>
+```
+
+### Updating the VDE requirements
+
+The virtual environment dependencies are stored in `requirements.txt`.
+Every time a dependency is installed or updated, `requirements.txt` must be updated manually.
+This can be done with the command
+
+```sh
+pip freeze > requirements.txt
+```
+
+
 
 ---
