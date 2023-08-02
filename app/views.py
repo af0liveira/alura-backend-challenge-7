@@ -21,6 +21,7 @@ class SelectedReviewsViewSet(viewsets.ModelViewSet):
 
     queryset = Review.objects.order_by('?')[:3]
     serializer_class = ReviewSerializer
+    http_method_names = ['get']
 
 
 class DestinationsViewSet(viewsets.ModelViewSet):
