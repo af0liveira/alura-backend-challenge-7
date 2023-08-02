@@ -1,9 +1,11 @@
 import random
 
-from rest_framework import viewsets, generics
+from rest_framework import viewsets, status
+from rest_framework.response import Response
 
 from app.models import Review, Destination
 from app.serializers import ReviewSerializer, DestinationSerializer
+from app.filters import DestinationFilter
 
 class ReviewsViewSet(viewsets.ModelViewSet):
     """Viewset to display all Review instances."""
@@ -22,3 +24,15 @@ class DestinationsViewSet(viewsets.ModelViewSet):
 
     queryset = Destination.objects.all()
     serializer_class = DestinationSerializer
+    filterset_class = DestinationFilter
+
+    def list(self, request, *args, **kwargs):
+        data = super().list(request, *args, **kwargs)
+        filter_queryset = self.filter_queryset(queryset=self.queryset)
+
+        if filter_queryset.count() > 0:
+            return data
+        else:
+            response = Response({'mensagem': "Nenhum destino encontrado."},
+                                 status=status.HTTP_404_NOT_FOUND)
+            return response
