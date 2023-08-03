@@ -41,8 +41,12 @@ class DestinationsTestCase(APITestCase):
         response = self.client.get(self.list_url+'0/')
         self.assertEquals(response.status_code, status.HTTP_404_NOT_FOUND)
 
-    def test_post_destination(self):
-        """Ensure that we can POST a new Destination object."""
+    def test_post_destination_with_ai_completion(self):
+        """Ensure that we can POST a new Destination with ChatGPT completion.
+        
+        If the 'description' field is not provided, it should be automatically
+        generated using ChatGPT.
+        """
         price = Money(1_000_000, currency='BRL')
         data = {
             "name": "Valhalla",
@@ -51,8 +55,30 @@ class DestinationsTestCase(APITestCase):
             "meta": "Valhala rules!",
         }
         response = self.client.post(self.list_url, data=data, format='json')
+        # print(response.data, flush=True)
         self.assertEquals(response.status_code, status.HTTP_201_CREATED)
         self.assertEquals(Destination.objects.count(), len(self.destinations)+1)
+        self.assertGreater(len(response.data['description'].strip()), 0)
+
+    def test_post_destination_with_explicit_description(self):
+        """Ensure that we can POST a new Destination with explicit description.
+        
+        The main goal is to ensure that non-blank 'description' is not replaced
+        by ChatGPT-generated values.
+        """
+        price = Money(1_000_000, currency='BRL')
+        data = {
+            "name": "Valhalla",
+            "price_currency": str(price.currency),
+            "price": str(price.amount),
+            "meta": "Valhala rules!",
+            "description": "X",
+        }
+        response = self.client.post(self.list_url, data=data, format='json')
+        # print(response.data, flush=True)
+        self.assertEquals(response.status_code, status.HTTP_201_CREATED)
+        self.assertEquals(Destination.objects.count(), len(self.destinations)+1)
+        self.assertEquals(response.data['description'], 'X')
 
     def test_put_destination(self):
         """Ensure that we can replace a Destination object with PUT."""
