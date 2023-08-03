@@ -17,6 +17,7 @@ def create_reviews(num_reviews):
     fake = Faker('pt_BR')
     Faker.seed(10)
 
+    print(f'Creating {num_reviews} Review objects...', flush=True, end=' ')
     for _ in range(num_reviews):
         sex = random.choice(['male', 'female'])
         gen_name = getattr(fake, f'name_{sex}')
@@ -26,21 +27,25 @@ def create_reviews(num_reviews):
         with open(f'assets/userpic_placeholder_{sex}.png', 'rb') as fp:
             review_obj.photo.save('userpic.png', File(fp), save=False)
         review_obj.save()
+    print(f'done.', flush=True)
 
 def create_destinations(num_destinations):
     fake = Faker('pt_BR')
     Faker.seed(10)
 
+    print(f'Creating {num_destinations} Destination objects...', flush=True, end=' ')
     for _ in range(num_destinations):
         name = fake.country()
         price = Money(random.randrange(10_000, 500_000), 'BRL')
-        destination_obj = Destination(name=name, price=price)
+        description = random.choice([f'{name}. Você vai amar!', f'Visite {name}!'])
+        destination_obj = Destination(name=name, price=price, description=description)
         with open(f'assets/destination_placeholder.png', 'rb') as fp:
-            destination_obj.photo.save('destination.png', File(fp), save=False)
+            destination_obj.photo_1.save('destination.png', File(fp), save=False)
         destination_obj.save()
+    print(f'done.', flush=True)
 
 
 if __name__ == '__main__':
 
-    create_reviews(20)
-    create_destinations(50)
+    create_reviews(10)
+    create_destinations(10)
