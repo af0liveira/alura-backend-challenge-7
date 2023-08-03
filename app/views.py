@@ -32,6 +32,19 @@ class DestinationsViewSet(viewsets.ModelViewSet):
     filterset_class = DestinationFilter
     http_method_names = ['post', 'get', 'put', 'delete']
 
+    def retrieve(self, request, *args, **kwargs):
+        """Respond with custom message if object cannot be retrieved."""
+
+        queryset = Destination.objects.filter(id=self.kwargs['pk'])
+
+        if not queryset:
+            response = Response({'mensagem': "Nenhum destino encontrado."},
+                                 status=status.HTTP_404_NOT_FOUND)
+        else:
+            response = super(DestinationsViewSet, self).retrieve(request, *args, **kwargs)
+
+        return response
+
     def list(self, request, *args, **kwargs):
         """Respond with HTTP 404 if request returns an empty list."""
 
