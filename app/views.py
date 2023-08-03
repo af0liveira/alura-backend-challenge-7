@@ -33,12 +33,15 @@ class DestinationsViewSet(viewsets.ModelViewSet):
     http_method_names = ['post', 'get', 'put', 'delete']
 
     def list(self, request, *args, **kwargs):
-        data = super().list(request, *args, **kwargs)
-        filter_queryset = self.filter_queryset(queryset=self.queryset)
+        """Respond with HTTP 404 if request returns an empty list."""
 
+        std_response = super(DestinationsViewSet, self).list(request, *args, **kwargs)
+
+        filter_queryset = self.filter_queryset(queryset=self.queryset)
         if filter_queryset.count() > 0:
-            return data
+            response = std_response
         else:
             response = Response({'mensagem': "Nenhum destino encontrado."},
                                  status=status.HTTP_404_NOT_FOUND)
-            return response
+
+        return response
