@@ -15,7 +15,8 @@ admin.site.register(Review, Reviews)
 class Destinations(admin.ModelAdmin):
     """Representation of the destinations table."""
 
-    list_display = ('id', 'name', 'photo', 'price')
+    list_display = ('id', 'name', 'price', 'photo_1', 'photo_2', 'meta',
+                    'description')
     list_display_links = ('id', 'name')
     list_per_page = 25
 

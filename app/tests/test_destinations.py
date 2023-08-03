@@ -45,9 +45,10 @@ class DestinationsTestCase(APITestCase):
         """Ensure that we can POST a new Destination object."""
         price = Money(1_000_000, currency='BRL')
         data = {
-            'name': 'Valhalla',
+            "name": "Valhalla",
             "price_currency": str(price.currency),
             "price": str(price.amount),
+            "meta": "Valhala rules!",
         }
         response = self.client.post(self.list_url, data=data, format='json')
         self.assertEquals(response.status_code, status.HTTP_201_CREATED)
@@ -57,9 +58,10 @@ class DestinationsTestCase(APITestCase):
         """Ensure that we can replace a Destination object with PUT."""
         price = Money(1_500_000, currency='BRL')
         data = {
-            'name': 'Valhalla',
+            "name": "Valhalla",
             "price_currency": str(price.currency),
             "price": str(price.amount),
+            "meta": "For honorable Vikings!",
         }
         response = self.client.put(self.list_url+'1/', data=data, format='json')
         self.assertEquals(response.status_code, status.HTTP_200_OK)
