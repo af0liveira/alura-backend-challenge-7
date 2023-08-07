@@ -1,3 +1,4 @@
+from django.contrib.auth import models
 from django.urls import reverse
 
 from rest_framework import status
@@ -21,6 +22,9 @@ class ReviewsTestCase(APITestCase):
                 review = 'Review of Reviewer #2.',
             ),
         ]
+        self.user = models.User.objects.create_user(username='the_user',
+                                                    password='the_password')
+        self.client.force_authenticate(self.user)
 
     def test_get_reviews_list(self):
         """Ensure that we can GET the list of Review objects."""

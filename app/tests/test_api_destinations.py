@@ -1,8 +1,8 @@
-from django.contrib.auth import authenticate, models
+from django.contrib.auth import models
 from django.urls import reverse
 
 from rest_framework import status
-from rest_framework.test import APITestCase, force_authenticate
+from rest_framework.test import APITestCase
 
 from djmoney.money import Money
 
@@ -14,7 +14,6 @@ class DestinationsAPITestCase(APITestCase):
 
     def setUp(self):
         self.list_url = reverse('Destinations-list')
-        # self.client.force_authenticate
         self.destinations = [
             Destination.objects.create(
                 name='Destination #1',
@@ -29,9 +28,9 @@ class DestinationsAPITestCase(APITestCase):
                 description='Description #2',
             ),
         ]
-        # self.user = models.User.objects.create_user(username='the_user',
-        #                                             password='the_password')
-        # force_authenticate(self.user)
+        self.user = models.User.objects.create_user(username='the_user',
+                                                    password='the_password')
+        self.client.force_authenticate(self.user)
 
     def test_get_destinations_list(self):
         """Ensure that we can GET the list of Destination objects."""
