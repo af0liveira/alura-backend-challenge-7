@@ -11,7 +11,6 @@ class ReviewsTestCase(APITestCase):
 
     def setUp(self):
         self.list_url = reverse('Reviews-list')
-
         self.reviews = [
             Review.objects.create(
                 name='Reviewer #1',
