@@ -44,7 +44,10 @@ router.register('depoimentos-home', SelectedReviewsViewSet, basename='SelectedRe
 router.register('destinos', DestinationsViewSet, basename='Destinations')
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', include('admin_honeypot.urls', namespace='admin_honeypot')),
+    path('api-cockpit/', admin.site.urls),
     path('', include(router.urls)),
     path('api-reference/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+handler404 = 'admin_honeypot.views.handler404'
