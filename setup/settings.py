@@ -28,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = str(os.getenv('SECRET_KEY'))
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['localhost']
 
@@ -146,10 +146,12 @@ REST_FRAMEWORK ={
         'rest_framework.authentication.BasicAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
     ),
 }
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:8000',  # NOTE: do not add '/' at the end of the url!
 ]
+
+CORS_ORIGIN_ALLOW_ALL = True
