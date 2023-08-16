@@ -3,6 +3,7 @@ from django.urls import reverse
 
 from rest_framework import status
 from rest_framework.test import APITestCase
+from unittest import skipIf
 
 from djmoney.money import Money
 
@@ -48,6 +49,7 @@ class DestinationsAPITestCase(APITestCase):
         response = self.client.get(self.list_url+'0/')
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
+    @skipIf(True, "Don't test it ChatGPT")
     def test_post_destination_with_ai_completion(self):
         """Ensure that we can POST a new Destination with ChatGPT completion.
         
