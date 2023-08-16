@@ -93,4 +93,19 @@ However, in this project this endpoint leads to a fake login page (honeypot) mim
 
 The actual Django Admin interface can be accessed via the endpoint `/api-cockpit/` -- e.g., `http://localhost:8000/api-cockpit/` if using the default server.
 
+## Automated tests
+
+The automated test suite can be executed with the command
+
+```sh
+python manage.py test
+```
+
+## API documentation
+
+Once the server is up an running, the auto-generated documentation can be accessed via on the following URLs:
+
+- `http://<domain>/swagger`
+- `http://<domain>/doc`
+
 ---
