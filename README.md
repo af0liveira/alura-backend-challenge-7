@@ -74,7 +74,9 @@ If `port` is not provided, it will default to `8000`.
 
 ### Creating a superuser for the API
 
-The API will require an authenticated user, which can be created with Django Admin.
+The API will require an authenticated user for methods other than GET, HEAD or
+OPTIONS.
+Regular users can be created with Django Admin.
 However, you will need to be authenticated as superuser to do so.
 
 In order to create a superuser for the API, you can run the command
