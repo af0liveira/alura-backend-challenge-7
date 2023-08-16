@@ -35,18 +35,18 @@ class DestinationsAPITestCase(APITestCase):
     def test_get_destinations_list(self):
         """Ensure that we can GET the list of Destination objects."""
         response = self.client.get(self.list_url)
-        self.assertEquals(response.status_code, status.HTTP_200_OK)
-        self.assertEquals(len(response.data), len(self.destinations))
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data), len(self.destinations))
 
     def test_get_destination(self):
         """Ensure that we can GET a single Destination object."""
         response = self.client.get(self.list_url+'1/')
-        self.assertEquals(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_destination_not_found(self):
         """Ensure code 404 if Destination object not found."""
         response = self.client.get(self.list_url+'0/')
-        self.assertEquals(response.status_code, status.HTTP_404_NOT_FOUND)
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
     def test_post_destination_with_ai_completion(self):
         """Ensure that we can POST a new Destination with ChatGPT completion.
@@ -63,8 +63,8 @@ class DestinationsAPITestCase(APITestCase):
         }
         response = self.client.post(self.list_url, data=data, format='json')
         # print(response.data, flush=True)
-        self.assertEquals(response.status_code, status.HTTP_201_CREATED)
-        self.assertEquals(Destination.objects.count(), len(self.destinations)+1)
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(Destination.objects.count(), len(self.destinations)+1)
         self.assertGreater(len(response.data['description'].strip()), 0)
 
     def test_post_destination_with_explicit_description(self):
@@ -83,9 +83,9 @@ class DestinationsAPITestCase(APITestCase):
         }
         response = self.client.post(self.list_url, data=data, format='json')
         # print(response.data, flush=True)
-        self.assertEquals(response.status_code, status.HTTP_201_CREATED)
-        self.assertEquals(Destination.objects.count(), len(self.destinations)+1)
-        self.assertEquals(response.data['description'], 'X')
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(Destination.objects.count(), len(self.destinations)+1)
+        self.assertEqual(response.data['description'], 'X')
 
     def test_put_destination(self):
         """Ensure that we can replace a Destination object with PUT."""
@@ -97,11 +97,11 @@ class DestinationsAPITestCase(APITestCase):
             "meta": "For honorable Vikings!",
         }
         response = self.client.put(self.list_url+'1/', data=data, format='json')
-        self.assertEquals(response.status_code, status.HTTP_200_OK)
-        self.assertEquals(Destination.objects.count(), len(self.destinations))
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(Destination.objects.count(), len(self.destinations))
 
     def test_delete_destination(self):
         """Ensure that we can DELETE a Destination object."""
         response = self.client.delete(self.list_url+'1/')
-        self.assertEquals(response.status_code, status.HTTP_204_NO_CONTENT)
-        self.assertEquals(Destination.objects.count(), len(self.destinations)-1)
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertEqual(Destination.objects.count(), len(self.destinations)-1)

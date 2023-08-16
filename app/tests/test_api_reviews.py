@@ -29,18 +29,18 @@ class ReviewsTestCase(APITestCase):
     def test_get_reviews_list(self):
         """Ensure that we can GET the list of Review objects."""
         response = self.client.get(self.list_url)
-        self.assertEquals(response.status_code, status.HTTP_200_OK)
-        self.assertEquals(len(response.data), len(self.reviews))
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data), len(self.reviews))
 
     def test_get_review(self):
         """Ensure that we can GET a single Review object."""
         response = self.client.get('/depoimentos/1/')
-        self.assertEquals(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_review_not_found(self):
         """Ensure code 404 if Review object not found."""
         response = self.client.get('/depoimentos/0/')
-        self.assertEquals(response.status_code, status.HTTP_404_NOT_FOUND)
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
     def test_post_review(self):
         """Ensure that we can POST a new Review object."""
@@ -49,8 +49,8 @@ class ReviewsTestCase(APITestCase):
             'review': 'Boneco Josias vai matar sua família!'
         }
         response = self.client.post(self.list_url, data=data, format='json')
-        self.assertEquals(response.status_code, status.HTTP_201_CREATED)
-        self.assertEquals(Review.objects.count(), len(self.reviews)+1)
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(Review.objects.count(), len(self.reviews)+1)
 
     def test_put_review(self):
         """Ensure that we can replace a Review object with PUT."""
@@ -59,11 +59,11 @@ class ReviewsTestCase(APITestCase):
             'review': 'Boneco Josias é um bandjindjinho!'
         }
         response = self.client.put('/depoimentos/1/', data=data, format='json')
-        self.assertEquals(response.status_code, status.HTTP_200_OK)
-        self.assertEquals(Review.objects.count(), len(self.reviews))
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(Review.objects.count(), len(self.reviews))
 
     def test_delete_review(self):
         """Ensure that we can DELETE a Review object."""
         response = self.client.delete('/depoimentos/1/')
-        self.assertEquals(response.status_code, status.HTTP_204_NO_CONTENT)
-        self.assertEquals(Review.objects.count(), len(self.reviews)-1)
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertEqual(Review.objects.count(), len(self.reviews)-1)
