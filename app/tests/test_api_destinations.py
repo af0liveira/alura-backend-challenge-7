@@ -1,5 +1,6 @@
 from django.contrib.auth import models
 from django.urls import reverse
+from django.test import tag
 
 from rest_framework import status
 from rest_framework.test import APITestCase
@@ -49,7 +50,8 @@ class DestinationsAPITestCase(APITestCase):
         response = self.client.get(self.list_url+'0/')
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
-    @skipIf(True, "Don't test it ChatGPT")
+    @skipIf(False, "Don't test if ChatGPT")
+    @tag('openai')
     def test_post_destination_with_ai_completion(self):
         """Ensure that we can POST a new Destination with ChatGPT completion.
         

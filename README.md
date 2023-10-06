@@ -103,6 +103,17 @@ The automated test suite can be executed with the command
 python manage.py test
 ```
 
+> **OpenAI tests**
+>
+> There is at least one test case that uses the OpenAI API for ChatGPT.
+> Not only it slows down the testing, it also incur financial costs.
+>
+> In order to skip OpenAI tests, use the `--exclude-tag=openai` option.  
+> E.g.
+> ```sh
+> python manage.py test --exclude-tag=openai  
+> ```
+
 ## API documentation
 
 Once the server is up an running, the auto-generated documentation can be accessed via on the following URLs:
